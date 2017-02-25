@@ -1,0 +1,13 @@
+Debugging complicated if statements is a pain.
+
+For this assignment, you must simplify the if statements as much as possible,
+while still maintaining correctness.
+
+Basically, you must write a "you" function that will have the minimum number
+of characters in it.
+
+The program will test the correctness of your function against mine, and then
+output to you.txt the number of characters it took you.
+
+Then do it again for you2(). (I.e. match correctness of me2() in the minimum
+number of characters.)

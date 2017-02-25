@@ -1,0 +1,64 @@
+  ____ ___  ____  _____    ____  ___  _     _____ 
+ / ___/ _ \|  _ \| ____|  / ___|/ _ \| |   |  ___|
+| |  | | | | | | |  _|   | |  _| | | | |   | |_   
+| |__| |_| | |_| | |___  | |_| | |_| | |___|  _|  
+ \____\___/|____/|_____|  \____|\___/|_____|_|    
+                                                  
+
+Due date: One week
+
+Assignment: You must implement Mergesort in as minimal statements as possible.
+You must exactly implement mergesort we go over in class - no variants or
+shortcuts allowed. Especially no implementations that are worse than O(NlogN) time).
+
+10 points represents a 100% on this assignment, which can be achieved by a
+combination of correctness and code size. If you go over 10, you get extra
+credit.
+
+7 of the points will be available for code correctness, for passing the test cases posted in /tmp/csci26
+
+Extra points will be scored based on how few semicolons (in golf terminology: "strokes") your code used -
+
+    20+ strokes: Did you even try? (-3 points)
+    16-19 strokes: Triple Bogey (-2 points)
+    14-15 strokes: Double Bogey (-1 points)
+    12-13 strokes: Bogey (0 points)
+    10-11 strokes: Par (1 points)
+    8-9 strokes: Birdie (2 points)
+    7 strokes: Eagle (3 points)
+    6 strokes: Double Eagle (4 points)
+    5 strokes: Condor (5 points)
+    4 strokes: Double Condor (6 points)
+	3 strokes: Triple Condor (7 points)
+    0-2 strokes: You're probably cheating (-40 DKP)
+
+If you fail to deallocate memory (as measured by valgrind), you will gain an additional stroke.
+
+If you have any warnings in your code (when compiled with -Wall) you will gain
+an additional stroke. If you can figure out how to get the compiler to not
+warn a given message even with -Wall on, you will not be penalized.
+
+If you turn in the same solution as someone else, you get 0 points. This
+includes internet solutions or code posted on a Discord server, etc.
+
+Rules:
+
+    1) You may only write code between the lines BEGIN GOLF and END GOLF in main.cc
+    2) You cannot change any lines of code outside that section.
+    3) You may use preprocessor directives, but only to improve readability, not to save any strokes in your code. (For example, "#define SEMICOLON ;" is right out.)
+    4) You may not use any STL or standard library classes or functions, except as noted below.
+    5) You may use the following data structures (and only the following data structures): a C-style array, a C++ style array (#include <array>), and vectors.
+    6) You may call any of the standard member functions on C++ arrays and vectors. (Like .size() or .at().) 
+	    Again, otherwise, you may use no functions. (Especially not sort().)
+	7) You may generate and use iterators and pointers for these three data structures.
+    8) You may use the comma operator to cut down on semicolons.
+    9) You may make and use new functions for yourself if you'd like.
+    10) You may use the ternary if operator (?:) to cut down on semicolons.
+    11) You may not use digraphs or trigraphs
+    12) Your code MUST ACTUALLY IMPLEMENT MERGESORT (and not some other sort function), and do so with a O(NlogN) running time.
+    13) If you have commented out lines of code with semicolons, they will count against your stroke count, so remove them before the code is collected.
+    14) You may use the ++ and -- operators to cut down on semicolons.
+    15) You may not interfere with the stroke count calculations.
+	16) If you new memory you must also delete the memory you allocate. You
+	can run valgrind on your code to see if you are leaking memory.
+	    "valgrind a.out" will run valgrind on your executable.

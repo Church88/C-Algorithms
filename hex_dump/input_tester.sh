@@ -1,0 +1,10 @@
+a.out < inputfile0 | diff - outputfile0 
+a.out < inputfile1 | diff - outputfile1 
+a.out < inputfile2 | diff - outputfile2 
+a.out < inputfile3 | diff - outputfile3 
+a.out < inputfile4 | diff - outputfile4 
+a.out < inputfile5 | diff - outputfile5 
+a.out < inputfile6 | diff - outputfile6 
+a.out < inputfile7 | diff - outputfile7 
+a.out < inputfile8 | diff - outputfile8 
+a.out < inputfile9 | diff - outputfile9 

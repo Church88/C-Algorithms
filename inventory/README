@@ -1,0 +1,154 @@
+Auto Inventory Database System Specification
+
+INTRODUCTION
+
+1. You will be tracking vehicle ID numbers (VINs) for an auto company here in California. A VIN is a unique 
+string that is associated with one (and only one) car in the state of California. For the purpose of this 
+assignment, VINs can be of any length >= 1, with only uppercase letters and numbers allowed.
+
+Valid VINs: 3XCCY, 9922AAA, A, 1, FOO, DOG, PINTO, MUSTANG
+Invalid VINs (which your system must reject): 3xccy, XCV%%%^, Foo, D0g, A, "" (empty string).
+
+2. VINs can be associated with one or more tables. A table is something like "Bob Walker, Salesman", or 
+"Lithia Nissan", and are each referred to by a unique ID that follows the same rules as a VIN. For example, 
+Bob's ID might be BOB, and Lithia Nissan's might be LITHIA.
+
+A VIN and an ID cannot have the same name. So if we have an ID called LITHIA, we cannot (i.e. it will 
+create an error) enter into our database a VIN called LITHIA.
+
+3. The user will create tables and their IDs, and then associate VINs with them. For example, she might add 
+3XXC to both BOB and LITHIA (Bob Walker works at Lithia, perhaps.)
+
+4. The user can also add all the current inventory from one table to another table. For example, we could 
+add Bob's entire inventory to LITHIA, and then add all of LITHIA's inventory to CALIFORNIA (which might 
+track all models in California). By default, you do not need to propogate further changes up the chain (for 
+example, if Bob gets a new car, you don't need to add it to LITHIA or CALIFORNIA), but you can do this for 
+extra credit points if you want.
+
+5. Then, the user will query the system to see which tables have which cars, or see which tables have which 
+cars in common (for example, if 7GGDS3 is held both by BOB and LITHIA).
+
+6. The user can also ask for a full accounting of the system, which will print all tables and their 
+contents, and at the end report how many unique VINs there are in the system.
+
+7. Duplicates get discarded. Either LITHIA has a specific VIN or it doesn't. If you try adding it twice, 
+ignore it.
+
+------
+
+COMMANDS
+
+A user will issue one command on each line.
+
+All commands must be all uppercase
+
+The operations the user can do (which means you must write code to do this):
+
+1. CREATE TABLE <ID>
+  Description: This creates a table with the ID given. It starts out holding no vehicles.
+  Example: CREATE TABLE BOB
+  Example: CREATE TABLE LITHIA
+  Example: CREATE TABLE CALIFORNIA
+
+2. INSERT INTO <ID> VALUES <One or more ID or VIN numbers separated by commas>
+  Description: Inserts into table <ID> the values found in the following list, which can be either VINs (in 
+  which case they're added to the table> or an ID of another table (in which case the table's entire 
+  inventory is copied over).
+  Example: INSERT INTO BOB VALUES PINTO,3XCCY,MUSTANG
+  Example: INSERT INTO LITHIA VALUES BOB,JEEP,RANGER
+  	(This copies over all of Bob's inventory to LITHIA, and also adds JEEP and RANGER to it.)
+  Hint: Use getline rather than cin into a string
+  Hint: Worry about handling one insert at a time before handling multiple
+  Hint: Handle inserting VINs before inserting IDs of other tables.
+ 
+3. SELECT FROM <ID1> UNION <ID2>
+  Description: Gives a list of all inventory found in both ID1 and ID2. Duplicates in ID2 are not listed. 
+  Print them out in the order they were originally inserted. The format is <VIN1>, <VIN2> ...
+  Example: SELECT FROM BOB UNION LITHIA
+  Sample Output: PINTO, 3XCCY, MUSTANG, JEEP, RANGER
+  Hint: You will only be called upon to UNION two sets, so you don't need to fully implement the 
+  inclusion/exclusion principle
+
+4. SELECT * FROM *
+  Description: Prints the entire inventory, in order of the tables as they were created, in order of the 
+  inventory as they were added to the tables. Format: <ID>: <VIN1>, <VIN2> ... Duplicates are allowed, as 
+  we're just printing out everything. After printing everything out, at the bottom print a single integer 
+  showing the total, unique count of cars in the system.
+  Example: SELECT * FROM *
+  Sample Output:
+    BOB: PINTO, 3XCCY, MUSTANG
+	LITHIA: PINTO, 3XCCY, MUSTANG, JEEP, RANGER
+	5
+
+5. SELECT * FROM <ID1> INNER JOIN <ID2>
+  Description: Prints all cars that tables ID1 and ID2 both hold in common. Output format: <VIN1>, <VIN2> 
+  ...
+  Example: SELECT * FROM BOB INNER JOIN LITHIA
+  Sample Output:
+    PINTO, 3XCCY, MUSTANG
+
+Extra Credit Options (if you do these, tell me in person to make sure you get your points, as the 
+autograder won't test them):
+
+6. IS <ID1> SUBSET <ID2>
+  Description: Prints out true or false, if ID1 is/isn't a subset of ID2.
+  Example: IS BOB SUBSET BOB
+  Sample Output: true
+  Example: IS LITHIA SUBSET BOB
+  Sample Output: false
+
+7. POSET
+  Description: Prints out all sets that are proper subsets of each other, in the format <ID1> <ID2>, where 
+  ID1 is a proper subset of ID2
+  Example: POSET
+  Sample Output: BOB LITHIA
+
+------
+
+ERRORS
+
+If the user inputs something invalid, print to cout "INVALID INPUT" and quit the program immediately.
+
+Possible errors include:
+VINs that aren't all uppercase letters and numbers
+IDs that aren't all uppercase letters and numbers
+Trying to create a duplicate ID or VIN
+Trying to create a ID or VIN with the same name 
+Commands that aren't all uppercase
+Invalid commands, like BLARG * FROM *
+Trying to insert or select from IDs that don't exist
+
+------
+
+HINTS
+
+1. Start early, so that if you run into trouble, you can ask for help. Get the easy stuff done first
+
+2. Read up on set theory, if you don't get what the point of this assignment is
+
+3. You should probably be using Vectors of strings for your data structures, but you don't have to. If you 
+don't know how to use the STL Vector class, please either Google it for code examples, or come talk to me.
+
+4. If these commands look vaguely like SQL, it's because they're vaguely like SQL. Don't try to impose the 
+actual SQL syntax on the assignment, or you'll probably break something. Follow the syntax I gave you 
+above.
+
+-----
+
+Grading
+
+This assignment will be graded in two phases. The first phase will be due in
+one week, and you will be scored from 0 to 5 points based on how much you
+accomplished on your own. Each command above implemented is worth one point,
+and detecting errors are worth up to two points. So if you implement 2 regular
+commands, one of the extra credit options, and do all the error checking, then
+you will score the full five points.
+
+The set theory worksheet is worth five points and will add to your first phase
+grade, for a total of 10 points.
+
+I will then release hints or sample source code to help you complete the
+assignment successfully. The final version will be due at the start of class
+on the second week, and will score between 0 and 10 points (12 with the extra
+credit). Each command is worth one point, and error checking is worth up
+to 5 points now. 
